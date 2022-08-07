@@ -14,14 +14,17 @@ public class DigitalLedgerClient {
 
         // Start Threads.
         int clientId = 0;
-        for (RequestsGenerator generator : generators) {
-            generator = new RequestsGenerator(ledger, clientId++, PThreads);
-            generator.start();
+
+        for (int i=0; i< generators.length; i++) {
+            generators[i] = new RequestsGenerator(ledger, clientId++,PThreads);
+            generators[i].start();
         }
+
 
         // Wait for all threads to finish
         for (RequestsGenerator generator : generators) {
             generator.join();
         }
+
     }
 }

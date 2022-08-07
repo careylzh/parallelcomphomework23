@@ -16,7 +16,7 @@ import static Solution.Config.*;
 
 public class DigitalLedger {
     private static DigitalLedger ledger = null;
-    private static AtomicInteger tick = new AtomicInteger(0);
+    private static AtomicInteger tick = new AtomicInteger(-1);
     private static AtomicInteger progress = new AtomicInteger(1);
 
     /**
@@ -90,7 +90,12 @@ public class DigitalLedger {
     }
 
     public void sendRequest(Request request) {
-        sharedQueue.offer(request);
+        try {
+            sharedQueue.put(request);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
     }
 
     public Request receiveRequest() {
@@ -104,7 +109,9 @@ public class DigitalLedger {
     }
 
     public int tick() {
-        return tick.incrementAndGet();
+        int t = tick.incrementAndGet();
+        System.out.println("Tick: "+ t);
+        return t;
     }
 
     public int progress() {
