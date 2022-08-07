@@ -13,22 +13,20 @@ public class Account {
         return this.id;
     }
 
-    public synchronized int add(int amt) {
+    public int add(int amt) {
         assert (amt >= 0);
         this.balance += amt;
         return this.balance;
     }
 
-    public synchronized int sub(int amt) throws InterruptedException {
+    public int sub(int amt) throws InterruptedException {
         assert (amt >= 0);
-        if (this.balance < amt)
-            wait();
+//        if (this.balance < amt)
         this.balance -= amt;
-        notifyAll();
         return this.balance;
     }
 
-    public synchronized int get() {
+    public int get() {
         return this.balance;
     }
 }
