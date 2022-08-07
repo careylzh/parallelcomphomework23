@@ -33,7 +33,7 @@ public class RequestsHandler extends Thread {
         while (task != numTasks) {//resulting in each server thread processes equal amount of requests.
             // Is this the most efficient way? Revise it in HW3.
             Request request = nextRequest();
-            request.setTimestamp(ledger.tick());
+            request.setTimestamp(ledger.tick()); //ledger null????
             try {
                 request.Process();
             } catch (InterruptedException e) {

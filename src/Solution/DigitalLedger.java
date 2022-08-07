@@ -94,7 +94,13 @@ public class DigitalLedger {
     }
 
     public Request receiveRequest() {
-        return sharedQueue.poll();
+        Request request = null;
+        try {
+            request = sharedQueue.take();
+        } catch(InterruptedException e) {
+            e.printStackTrace();
+        }
+        return request;
     }
 
     public int tick() {
