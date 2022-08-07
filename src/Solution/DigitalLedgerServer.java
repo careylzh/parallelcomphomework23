@@ -20,15 +20,19 @@ public class DigitalLedgerServer {
         RequestsHandler[] handlers = new RequestsHandler[CThreads];
         //
         int serverId = 0;
-        for (RequestsHandler handler : handlers) {
-            handler = new RequestsHandler(ledger, serverId++,CThreads);
-            handler.start();
+        for (int i=0; i< handlers.length; i++) {
+            handlers[i] = new RequestsHandler(ledger, serverId++,CThreads);
+            handlers[i].start();
         }
 
+//        for (RequestsHandler handler : handlers) {
+//            handler = new RequestsHandler(ledger, serverId++,CThreads);
+//            handler.start();
+//        }
         // Wait for all threads to finish
         for (RequestsHandler handler : handlers) {
             handler.join();
         }
-        //
+
     }
 }
