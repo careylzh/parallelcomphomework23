@@ -11,7 +11,7 @@
   - `TransferRequest` <br/>
 
 Qn 1: **global** data structure <br/>
-Qn 2: It seems that there are only 3 types of requests <br/>
+Qn 2: It seems that there are only 3 types of requests but these 3 requests share an interface (given in code template) <br/>
 Qn 3: There is a TODO for `RequestGenerator` class - so are requests randomly simulated? Probably. can use mod 3 + java's rand
 
 Given assumptions:
